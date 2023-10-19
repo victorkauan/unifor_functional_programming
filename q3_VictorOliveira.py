@@ -54,6 +54,6 @@ if __name__ == "__main__":
     print() or transform_image(
         user_image_path,
         read_image(user_image_path),
-        sum_rgb_values(default_rgb_value_message() or get_rgb_values())
+        sum_rgb_values(rgb_values_message() or default_rgb_value_message() or get_rgb_values())
     )
     print() or show_images_success()
