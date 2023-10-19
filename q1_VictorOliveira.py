@@ -49,7 +49,6 @@ show_menu = lambda: all([
 ])
 run_operation = lambda: operation_dict()[value_if_in_iterable(get_operation(), operation_dict().keys())]["function"]()
 
-if __name__ == "__main__":
-    question_title() or print() or show_menu() or print() or check_account() or print()
-    balance_amount = run_operation()
-    print() or check_account()
+question_title() or print() or show_menu() or print() or check_account() or print()
+balance_amount = run_operation()
+print() or check_account()

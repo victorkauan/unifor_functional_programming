@@ -130,5 +130,4 @@ loop = lambda: (
 )
 app = lambda: question_title() or print() or loop()
 
-if __name__ == "__main__":
-    app()
+app()

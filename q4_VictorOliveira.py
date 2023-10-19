@@ -51,102 +51,101 @@ select_from_where = lambda table, attributes, cursor, conditions=None: run_sql_c
     command=f"SELECT {comma_concat(attributes)} FROM {table} {f'WHERE {conditions}' if conditions else ''};",
 )
 
-if __name__ == "__main__":
-    question_title()
+question_title()
 
-    # MySQL connection
-    mysql_database = connect_database(**MYSQL_CREDENTIALS())
-    mysql_cursor = create_cursor(database=mysql_database)
+# MySQL connection
+mysql_database = connect_database(**MYSQL_CREDENTIALS())
+mysql_cursor = create_cursor(database=mysql_database)
 
-    # Create database
-    create_database(database=DATABASE_NAME(), cursor=mysql_cursor, if_not_exists=True)
-    use_database(database=DATABASE_NAME(), cursor=mysql_cursor)
+# Create database
+create_database(database=DATABASE_NAME(), cursor=mysql_cursor, if_not_exists=True)
+use_database(database=DATABASE_NAME(), cursor=mysql_cursor)
 
-    # Create tables
-    create_table(
-        table="usuarios",
-        attributes=("id INT AUTO_INCREMENT PRIMARY KEY", "nome VARCHAR(255)", "console VARCHAR(255)"),
-        cursor=mysql_cursor,
-        if_not_exists=True
-    )
+# Create tables
+create_table(
+    table="usuarios",
+    attributes=("id INT AUTO_INCREMENT PRIMARY KEY", "nome VARCHAR(255)", "console VARCHAR(255)"),
+    cursor=mysql_cursor,
+    if_not_exists=True
+)
 
-    create_table(
-        table="jogos",
-        attributes=("id INT AUTO_INCREMENT PRIMARY KEY", "nome VARCHAR(255)", "data_lancamento DATE"),
-        cursor=mysql_cursor,
-        if_not_exists=True,
-    )
+create_table(
+    table="jogos",
+    attributes=("id INT AUTO_INCREMENT PRIMARY KEY", "nome VARCHAR(255)", "data_lancamento DATE"),
+    cursor=mysql_cursor,
+    if_not_exists=True,
+)
 
-    # Insert data
-    insert_into(
-        table="usuarios",
-        attributes=("nome", "console"),
-        values=(
-            ("Victor", "PS4"),
-            ("João", "Xbox"),
-            ("Maria", "PC"),
-            ("José", "PS4"),
-        ),
-        cursor=mysql_cursor,
-    )
+# Insert data
+insert_into(
+    table="usuarios",
+    attributes=("nome", "console"),
+    values=(
+        ("Victor", "PS4"),
+        ("João", "Xbox"),
+        ("Maria", "PC"),
+        ("José", "PS4"),
+    ),
+    cursor=mysql_cursor,
+)
 
-    insert_into(
-        table="jogos",
-        attributes=("nome", "data_lancamento"),
-        values=(
-            ("God of War", "2018-04-20"),
-            ("Uncharted 4", "2016-05-10"),
-            ("The Last of Us", "2013-06-14"),
-        ),
-        cursor=mysql_cursor,
-    )
+insert_into(
+    table="jogos",
+    attributes=("nome", "data_lancamento"),
+    values=(
+        ("God of War", "2018-04-20"),
+        ("Uncharted 4", "2016-05-10"),
+        ("The Last of Us", "2013-06-14"),
+    ),
+    cursor=mysql_cursor,
+)
 
-    # Tests
-    select_from_where(
-        table="usuarios",
-        attributes=("id", "nome"),
-        cursor=mysql_cursor,
-        conditions="console = 'PS4'",
-    )
+# Tests
+select_from_where(
+    table="usuarios",
+    attributes=("id", "nome"),
+    cursor=mysql_cursor,
+    conditions="console = 'PS4'",
+)
 
-    print(fetch_all(cursor=mysql_cursor))
+print(fetch_all(cursor=mysql_cursor))
 
-    delete_from_where(
-        table="usuarios",
-        conditions="nome = 'Victor'",
-        cursor=mysql_cursor,
-    )
+delete_from_where(
+    table="usuarios",
+    conditions="nome = 'Victor'",
+    cursor=mysql_cursor,
+)
 
-    select_from_where(
-        table="usuarios",
-        attributes=("*",),
-        cursor=mysql_cursor,
-        conditions="console = 'PS4'",
-    )
+select_from_where(
+    table="usuarios",
+    attributes=("*",),
+    cursor=mysql_cursor,
+    conditions="console = 'PS4'",
+)
 
-    print(fetch_all(cursor=mysql_cursor))
+print(fetch_all(cursor=mysql_cursor))
 
-    select_from_where(
-        table="jogos",
-        attributes=("*",),
-        cursor=mysql_cursor,
-    )
+select_from_where(
+    table="jogos",
+    attributes=("*",),
+    cursor=mysql_cursor,
+)
 
-    print(fetch_all(cursor=mysql_cursor))
+print(fetch_all(cursor=mysql_cursor))
 
-    delete_from_where(
-        table="jogos",
-        conditions="nome = 'Uncharted 4'",
-        cursor=mysql_cursor,
-    )
+delete_from_where(
+    table="jogos",
+    conditions="nome = 'Uncharted 4'",
+    cursor=mysql_cursor,
+)
 
-    select_from_where(
-        table="jogos",
-        attributes=("*",),
-        cursor=mysql_cursor,
-    )
+select_from_where(
+    table="jogos",
+    attributes=("*",),
+    cursor=mysql_cursor,
+)
 
-    print(fetch_all(cursor=mysql_cursor))
+print(fetch_all(cursor=mysql_cursor))
 
-    drop_database(database=DATABASE_NAME(), cursor=mysql_cursor)
-    mysql_database.close()
+drop_database(database=DATABASE_NAME(), cursor=mysql_cursor)
+mysql_database.close()

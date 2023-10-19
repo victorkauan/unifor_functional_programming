@@ -62,5 +62,4 @@ sign_in_endpoint = lambda: success_sign_in_response if sign_in(users) else error
 app.add_url_rule(rule="/sign_up", endpoint="sign_up", view_func=sign_up_endpoint, methods=["POST"])
 app.add_url_rule(rule="/sign_in", endpoint="sign_in", view_func=sign_in_endpoint, methods=["POST"])
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080)
+app.run(host="0.0.0.0", port=8080)

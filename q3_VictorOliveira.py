@@ -48,12 +48,11 @@ transform_image = lambda image_path, image, function: (
     show_image(image),
 )
 
-if __name__ == "__main__":
-    question_title() or print()
-    user_image_path = enter_image_path() or IMAGE_PATH()
-    print() or transform_image(
-        user_image_path,
-        read_image(user_image_path),
-        sum_rgb_values(rgb_values_message() or default_rgb_value_message() or get_rgb_values())
-    )
-    print() or show_images_success()
+question_title() or print()
+user_image_path = enter_image_path() or IMAGE_PATH()
+print() or transform_image(
+    user_image_path,
+    read_image(user_image_path),
+    sum_rgb_values(rgb_values_message() or default_rgb_value_message() or get_rgb_values())
+)
+print() or show_images_success()
